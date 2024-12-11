@@ -7,11 +7,16 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  // Key to manage the state of the login form and perform validation
   final _formKey = GlobalKey<FormState>();
+
+  // Controllers to handle user input for email and password fields
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  // Function to handle login action
   void _login() {
+    // Validates the form and navigates to the HomeScreen if valid
     if (_formKey.currentState!.validate()) {
       Navigator.pushReplacement(
         context,
@@ -23,77 +28,83 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // Custom AppBar with a gradient background
       appBar: PreferredSize(
         preferredSize:
-            Size.fromHeight(60), // Adjust the appbar height if needed
+            Size.fromHeight(60), // Sets a specific height for the AppBar
         child: AppBar(
           flexibleSpace: Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [Colors.white, Colors.white],
+                colors: [Colors.white, Colors.white], // Gradient colors
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
             ),
           ),
-
-          centerTitle: true, // Center title for better alignment
+          centerTitle: true, // Centers the title text
         ),
       ),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.white, Colors.white],
+            colors: [Colors.white, Colors.white], // Gradient background
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
         ),
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding:
+                const EdgeInsets.all(16.0), // Adds padding around the content
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment:
+                  MainAxisAlignment.center, // Centers content vertically
+              crossAxisAlignment:
+                  CrossAxisAlignment.center, // Aligns content horizontally
               children: [
-                const SizedBox(height: 20),
+                const SizedBox(height: 20), // Spacer for vertical alignment
 
-                // "Welcome to GlamUp" text with shadow effect
+                // App title displayed at the top
                 const Text(
                   'makeupbox',
                   style: TextStyle(
-                    fontSize: 40,
+                    fontSize: 40, // Large font size for visibility
                     fontStyle: FontStyle.normal,
-                    color: Colors.black,
-                    //fontWeight: FontWeight.bold,
+                    color: Colors.black, // Black text color
                   ),
                 ),
 
-                const SizedBox(height: 90),
+                const SizedBox(height: 90), // Spacer between title and form
 
-                // Login Form
+                // Login form with validation
                 Form(
-                  key: _formKey,
+                  key: _formKey, // Assigning the key for form validation
                   child: Column(
                     children: [
+                      // Email input field with validation
                       Container(
-                        width: 400,
+                        width: 400, // Sets a fixed width for the input field
                         child: TextFormField(
-                          controller: _emailController,
+                          controller: _emailController, // Binds the controller
                           decoration: InputDecoration(
-                            prefixIcon:
-                                const Icon(Icons.email, color: Colors.black),
-                            labelText: 'Email',
+                            prefixIcon: const Icon(Icons.email,
+                                color: Colors.black), // Icon for email
+                            labelText: 'Email', // Label for the input field
                             labelStyle: const TextStyle(color: Colors.black),
                             enabledBorder: OutlineInputBorder(
                               borderSide: const BorderSide(color: Colors.black),
-                              borderRadius: BorderRadius.circular(30),
+                              borderRadius:
+                                  BorderRadius.circular(30), // Rounded borders
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderSide: const BorderSide(color: Colors.black),
-                              borderRadius: BorderRadius.circular(30),
+                              borderRadius:
+                                  BorderRadius.circular(30), // Rounded borders
                             ),
                           ),
                           validator: (value) {
+                            // Validates email input
                             if (value == null || value.isEmpty) {
                               return 'Please enter your email';
                             }
@@ -105,27 +116,34 @@ class _LoginScreenState extends State<LoginScreen> {
                           },
                         ),
                       ),
-                      const SizedBox(height: 16),
+
+                      const SizedBox(height: 16), // Spacer between fields
+
+                      // Password input field with validation
                       Container(
-                        width: 400,
+                        width: 400, // Sets a fixed width for the input field
                         child: TextFormField(
-                          controller: _passwordController,
-                          obscureText: true,
+                          controller:
+                              _passwordController, // Binds the controller
+                          obscureText: true, // Hides the password input
                           decoration: InputDecoration(
-                            prefixIcon:
-                                const Icon(Icons.lock, color: Colors.black),
-                            labelText: 'Password',
+                            prefixIcon: const Icon(Icons.lock,
+                                color: Colors.black), // Icon for password
+                            labelText: 'Password', // Label for the input field
                             labelStyle: const TextStyle(color: Colors.black),
                             enabledBorder: OutlineInputBorder(
                               borderSide: const BorderSide(color: Colors.black),
-                              borderRadius: BorderRadius.circular(30),
+                              borderRadius:
+                                  BorderRadius.circular(30), // Rounded borders
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderSide: const BorderSide(color: Colors.black),
-                              borderRadius: BorderRadius.circular(30),
+                              borderRadius:
+                                  BorderRadius.circular(30), // Rounded borders
                             ),
                           ),
                           validator: (value) {
+                            // Validates password input
                             if (value == null || value.isEmpty) {
                               return 'Please enter your password';
                             }
@@ -136,12 +154,16 @@ class _LoginScreenState extends State<LoginScreen> {
                           },
                         ),
                       ),
-                      const SizedBox(height: 10),
+
+                      const SizedBox(height: 10), // Spacer for alignment
+
+                      // "Forgot Password" link
                       Align(
-                        alignment: Alignment.centerRight,
+                        alignment:
+                            Alignment.centerRight, // Aligns text to the right
                         child: TextButton(
                           onPressed: () {
-                            // Handle Forgot Password action
+                            // Action for "Forgot Password" (currently empty)
                           },
                           child: Padding(
                             padding: const EdgeInsets.only(
@@ -149,35 +171,46 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             child: const Text(
                               'Forgot Password?',
-                              style: TextStyle(color: Colors.black),
+                              style: TextStyle(
+                                  color: Colors.black), // Black text color
                             ),
                           ),
                         ),
                       ),
-                      const SizedBox(height: 30),
+
+                      const SizedBox(height: 30), // Spacer before login button
+
+                      // Login button with action
                       ElevatedButton(
-                        onPressed: _login,
+                        onPressed: _login, // Calls the login function
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 50, vertical: 12),
-                          backgroundColor: Colors.black,
+                              horizontal: 50, vertical: 12), // Button size
+                          backgroundColor: Colors.black, // Button color
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30)),
+                              borderRadius:
+                                  BorderRadius.circular(30)), // Rounded shape
                         ),
                         child: const Text(
                           'Login',
                           style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold), // Button text
                         ),
                       ),
-                      const SizedBox(height: 20),
+
+                      const SizedBox(
+                          height: 20), // Spacer before "Create Account"
+
+                      // "Create an Account" link
                       TextButton(
                         onPressed: () {
-                          // Navigate to SignUp screen
+                          // Action for navigating to the SignUp screen (currently empty)
                         },
                         child: const Text(
                           'Create an Account',
-                          style: TextStyle(color: Colors.black),
+                          style: TextStyle(
+                              color: Colors.black), // Black text color
                         ),
                       ),
                     ],
